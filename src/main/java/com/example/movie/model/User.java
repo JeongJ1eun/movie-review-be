@@ -18,4 +18,10 @@ public class User {
     private String providerId;
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
+    
+    @Column(length = 1000, nullable = true)
+    private String bio;
+    
+    @Column(nullable = true)
+    private String profileImageUrl;
 }
