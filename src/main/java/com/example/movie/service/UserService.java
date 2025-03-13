@@ -31,4 +31,13 @@ public class UserService {
         
         userRepository.save(user);
     }
+
+    public void validateUserStatus(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+
+        if (user.isBlocked()) {
+            throw new IllegalStateException("차단된 사용자입니다.");
+        }
+    }
 } 

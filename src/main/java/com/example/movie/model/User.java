@@ -19,9 +19,29 @@ public class User {
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
     
-    @Column(length = 1000, nullable = true)
+    @Column(length = 300, nullable = true)
     private String bio;
     
     @Column(nullable = true)
     private String profileImageUrl;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status = UserStatus.ACTIVE; // 사용자 상태
+
+    public enum UserStatus {
+        ACTIVE,
+        BLOCKED
+    }
+
+    public void block() {
+        this.status = UserStatus.BLOCKED;
+    }
+
+    public void unblock() {
+        this.status = UserStatus.ACTIVE;
+    }
+
+    public boolean isBlocked() {
+        return this.status == UserStatus.BLOCKED;
+    }
 }
